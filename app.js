@@ -20,16 +20,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Check working hours middleware
-// app.use((req, res, next) => {
-//     const currentDay = new Date().getDay();
-//     const currentHour = new Date().getHours();
+app.use((req, res, next) => {
+    const currentDay = new Date().getDay();
+    const currentHour = new Date().getHours();
 
-//     if (currentDay >= 1 && currentDay <= 5 && currentHour >= 9 && currentHour < 17) {
-//     next(); // Continue to the next middleware or route
-//     } else {
-//         res.send('This website is only available during working hours (Monday - Friday, 9am - 5pm).');
-//     }
-// });
+    if (currentDay >= 1 && currentDay <= 5 && currentHour >= 9 && currentHour < 17) {
+    next(); // Continue to the next middleware or route
+    } else {
+        res.send('This website is only available during working hours (Monday - Friday, 9am - 5pm).');
+    }
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
